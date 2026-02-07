@@ -1,9 +1,14 @@
+"use client";
 // component
+import { useState } from "react";
 import DisplayBimamceComponent from "../components/displaybinancecomponent";
 // enum
 import { binancetype } from "../Tsutilities/enums";
+import { Tooltip } from "@mui/material";
 
 export default function Binances() {
+  // search
+  const [searchbinance, setsearchbinance] = useState<string>("");
   const binances = [
     { label: "Bitcoin", value: binancetype.Bitcoin },
     { label: "Ethereum", value: binancetype.Ethereum },
@@ -15,8 +20,30 @@ export default function Binances() {
     { label: "Avalanche", value: binancetype.Avalanche },
     { label: "Polkadot", value: binancetype.Polkadot },
     { label: "Polygon", value: binancetype.Polygon },
+    { label: "Arbitrum", value: binancetype.Arbitrum },
+    { label: "Optimism", value: binancetype.Optimism },
+    { label: "Render", value: binancetype.Render },
+    { label: "Ocean", value: binancetype.Ocean },
+    { label: "Chainlink", value: binancetype.Chainlink },
+    { label: "Uniswap", value: binancetype.Uniswap },
+    { label: "Aave", value: binancetype.Aave },
+    { label: "Maker", value: binancetype.Maker },
+    { label: "Sandbox", value: binancetype.Sandbox },
+    { label: "Decentraland", value: binancetype.Decentraland },
+    { label: "AxieInfinity", value: binancetype.AxieInfinity },
+    { label: "ShibaInu", value: binancetype.ShibaInu },
+    { label: "Pepe", value: binancetype.Pepe },
+    { label: "Cosmos", value: binancetype.Cosmos },
+    { label: "Near", value: binancetype.Near },
+    { label: "Algorand", value: binancetype.Algorand },
+    { label: "Filecoin", value: binancetype.Filecoin },
   ];
-  const mappingbinances = binances.map((item) => {
+
+  const filteredBinances = binances.filter((item) =>
+    item.label.toLowerCase().includes(searchbinance.toLowerCase()),
+  );
+
+  const mappingbinances = filteredBinances.map((item) => {
     return (
       <DisplayBimamceComponent
         route={item.label}
@@ -25,10 +52,34 @@ export default function Binances() {
         symbol={item.value}
       />
     );
-  }, []);
+  });
 
   return (
     <div className="min-h-screen bg-[#0b0e11] p-6">
+      {/* search */}
+      <div className="flex justify-end pb-6 ">
+        <input
+          type="text"
+          placeholder="Search coin..."
+          className="
+    w-full max-w-sm
+    rounded-lg
+    bg-[#0f172a]
+    border border-white/10
+    px-4 py-3
+    text-sm text-white
+    placeholder-gray-400
+    outline-none
+    transition
+    focus:border-yellow-500
+    focus:ring-2
+    focus:ring-yellow-500/20
+  "
+          onChange={(e) => {
+            setsearchbinance(e.target.value);
+          }}
+        />
+      </div>
       <div className="max-w-6xl mx-auto overflow-x-auto rounded-xl border border-white/10 bg-[#111827] shadow-lg">
         <table className="w-full border-collapse">
           <thead className="bg-white/5 text-gray-400 text-sm uppercase tracking-wide">

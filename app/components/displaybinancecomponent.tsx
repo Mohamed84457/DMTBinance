@@ -12,11 +12,28 @@ const imageMap: Record<binancetype, string> = {
   [binancetype.Binance_Coin]: "/binance_coin.png",
   [binancetype.Solana]: "/solana.png",
   [binancetype.Ripple]: "/ripple.jpg",
-  [binancetype.Cardano]: "/cardano.png",
+  [binancetype.Cardano]: "/cardano.jpg",
   [binancetype.Dogecoin]: "/dogecoin.png",
   [binancetype.Avalanche]: "/avalanche.png",
   [binancetype.Polkadot]: "/polkadot.png",
   [binancetype.Polygon]: "/polygon.jpg",
+  [binancetype.Arbitrum]: "/Arbitrum.png",
+  [binancetype.Optimism]: "/Optimism.png",
+  [binancetype.Render]: "/Render.png",
+  [binancetype.Ocean]: "/Ocean.jpg",
+  [binancetype.Chainlink]: "/Chainlink.jpg",
+  [binancetype.Uniswap]: "/Uniswap.png",
+  [binancetype.Aave]: "/Aave.png",
+  [binancetype.Maker]: "/Maker.png",
+  [binancetype.Sandbox]: "/Sandbox.jpg",
+  [binancetype.Decentraland]: "/Decentraland.png",
+  [binancetype.AxieInfinity]: "/AxieInfinity.png",
+  [binancetype.ShibaInu]: "/ShibaInu.png",
+  [binancetype.Pepe]: "/Pepe.png",
+  [binancetype.Cosmos]: "/Cosmos.jpg",
+  [binancetype.Near]: "/Near.png",
+  [binancetype.Algorand]: "/Algorand.png",
+  [binancetype.Filecoin]: "/Filecoin.png",
 };
 
 // Format numbers like 1.2B / 3.4M / 5K
@@ -75,8 +92,12 @@ export default function DisplayBimamceComponent({
       });
       setPrevPrice((prev) => coinBinanceInfo?.lastPrice ?? prev);
     };
-    ws.onerror = (err) => console.error("WS error:", err);
-    ws.onclose = () => console.log("WS closed:", symbol);
+    ws.onerror = () => {
+      // Binance often triggers this with no useful info
+    };
+    ws.onclose = (event) => {
+      console.log("WS closed:", symbol, event.code, event.reason);
+    };
 
     return () => ws.close();
   }, [symbol]);

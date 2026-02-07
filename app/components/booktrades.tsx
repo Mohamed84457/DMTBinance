@@ -1,6 +1,8 @@
 "use client";
 // mui icons
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+// mui
+import Tooltip from "@mui/material/Tooltip";
 
 // components
 import SellTradesComponent from "./selltrades";
@@ -84,20 +86,21 @@ export default function Booktrades({
 
   // mapping trade type
   const mappingtradetype = booktradetype.map((item) => (
-    <div
-      key={item.name}
-      onClick={() => settradetype(item.type)}
-      className="cursor-pointer"
-    >
-      <BoxOrderBooks type={item.type} />
-    </div>
+    <Tooltip title={item.name} key={item.name}>
+      <div onClick={() => settradetype(item.type)} className="cursor-pointer">
+        <BoxOrderBooks type={item.type} />
+      </div>
+    </Tooltip>
   ));
 
   return (
     <div className="flex flex-col gap-6">
       <div className="text-amber-100 flex justify-between">
         <h1>Order Book</h1>
+            <Tooltip title="more">
+
         <MoreVertIcon className="text-gray-100 hover:cursor-pointer" />
+        </Tooltip>
       </div>
       <div className="flex justify-between gap-4">
         <div className=" flex gap-4">{mappingtradetype}</div>

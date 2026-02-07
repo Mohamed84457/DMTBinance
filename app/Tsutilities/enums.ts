@@ -16,6 +16,7 @@ export enum intervals {
 
 // binance type
 export enum binancetype {
+  // 🔥 Majors
   Bitcoin = "BTCUSDT",
   Ethereum = "ETHUSDT",
   Binance_Coin = "BNBUSDT",
@@ -26,4 +27,39 @@ export enum binancetype {
   Avalanche = "AVAXUSDT",
   Polkadot = "DOTUSDT",
   Polygon = "MATICUSDT",
+
+  // 🚀 Layer 2 / Scaling
+  Arbitrum = "ARBUSDT",
+  Optimism = "OPUSDT",
+
+  // 🧠 AI / Data
+  Render = "RNDRUSDT",
+  Ocean = "OCEANUSDT",
+
+  // 💎 DeFi
+  Chainlink = "LINKUSDT",
+  Uniswap = "UNIUSDT",
+  Aave = "AAVEUSDT",
+  Maker = "MKRUSDT",
+
+  // 🎮 Gaming / Metaverse
+  Sandbox = "SANDUSDT",
+  Decentraland = "MANAUSDT",
+  AxieInfinity = "AXSUSDT",
+
+  // 🪙 Meme Coins
+  ShibaInu = "SHIBUSDT",
+  Pepe = "PEPEUSDT",
+
+  // 🧱 Infrastructure
+  Cosmos = "ATOMUSDT",
+  Near = "NEARUSDT",
+  Algorand = "ALGOUSDT",
+  Filecoin = "FILUSDT",
+
+  // ⚡ Others (High Volume)
+  // Litecoin = "LTCUSDT",
+  // Tron = "TRXUSDT",
+  // Stellar = "XLMUSDT",
+  // BitcoinCash = "BCHUSDT",
 }
