@@ -1,73 +1,58 @@
 // /app/binance/[binancetype]/page.tsx
+
 import { binancetype } from "@/app/Tsutilities/enums";
-// mui icons
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { notFound } from "next/navigation";
+
 // components
 import BinanceChart from "../../components/bianancechart";
 import Booktrades from "../../components/booktrades";
 import Displaybinancetype from "@/app/components/diplaybinancetype";
+import RouteBackComponent from "@/app/components/routebackcomponent";
+
 import Link from "next/link";
-// mui
-import { Tooltip } from "@mui/material";
-// interface
+
 interface BinancePageProps {
   params: { binancecoin: string };
 }
 
 export default async function BinancePage({ params }: BinancePageProps) {
-  const { binancecoin } = await params;
+  const { binancecoin: coinSlug } = await params;
+  console.log(coinSlug);
 
-  const binanceSymbolMap: Record<string, binancetype> = {
-    bitcoin: binancetype.Bitcoin,
-    ethereum: binancetype.Ethereum,
-    solana: binancetype.Solana,
-    binance_coin: binancetype.Binance_Coin,
-    ripple: binancetype.Ripple,
-    cardano: binancetype.Cardano,
-    dogecoin: binancetype.Dogecoin,
-    avalanche: binancetype.Avalanche,
-    polkadot: binancetype.Polkadot,
-    polygon: binancetype.Polygon,
-    arbitrum: binancetype.Arbitrum,
-    optimism: binancetype.Optimism,
-    render: binancetype.Render,
-    ocean: binancetype.Ocean,
-    chainlink: binancetype.Chainlink,
-    uniswap: binancetype.Uniswap,
-    aave: binancetype.Aave,
-    maker: binancetype.Maker,
-    sandbox: binancetype.Sandbox,
-    decentraland: binancetype.Decentraland,
-    axieinfinity: binancetype.AxieInfinity,
-    shibainu: binancetype.ShibaInu,
-    pepe: binancetype.Pepe,
-    cosmos: binancetype.Cosmos,
-    near: binancetype.Near,
-    algorand: binancetype.Algorand,
-    filecoin: binancetype.Filecoin,
-  };
-  if (!binancecoin) return;
-  // coin type
-  const mappedSymbol = binanceSymbolMap[binancecoin.toLowerCase()];
-  if (!mappedSymbol) {
-    console.warn("Unknown coin symbol:", binancecoin);
-    return;
+  const symbol = coinSlug.toUpperCase();
+
+  if (!/^[A-Z0-9]+$/.test(symbol)) {
+    notFound();
   }
+  const binanceSymbolMap: Record<string, binancetype> = Object.entries(
+    binancetype,
+  ).reduce(
+    (acc, [key, value]) => {
+      acc[key.toLowerCase()] = value;
+      return acc;
+    },
+    {} as Record<string, binancetype>,
+  );
+
+  const mappedSymbol =coinSlug
   console.log(mappedSymbol);
+  if (!mappedSymbol) {
+    notFound();
+  }
+
   return (
     <div className="min-h-screen w-full p-4">
       <div className="text-amber-100">
-        <Link href={"/binance"}>
-          <Tooltip title="back">
-            <ArrowBackIosNewIcon className="hover:text-[#F0B90B]  cursor-pointer mb-2" />
-          </Tooltip>
-        </Link>
+        <RouteBackComponent />
+
         <Displaybinancetype binancecointype={mappedSymbol} />
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="col-span-1 p-4 rounded-xl shadow-lg">
           <BinanceChart key={mappedSymbol} Coinsymbol={mappedSymbol} />
         </div>
+
         <Booktrades binancecoinsymbol={mappedSymbol} />
       </div>
     </div>

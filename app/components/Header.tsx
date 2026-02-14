@@ -54,9 +54,9 @@ const products = [
     icon: SquaresPlusIcon,
   },
   {
-    name: "Wallet",
-    description: "Deposit & withdraw",
-    href: "/wallet",
+    name: "categories",
+    description: "show all binance category",
+    href: "/categories",
     icon: FingerPrintIcon,
   },
 ];

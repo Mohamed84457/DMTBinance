@@ -5,9 +5,8 @@ import {
   trade,
   chart_config,
   Binance24hTicker,
+  Binanceinfoaround24,
 } from "../Tsutilities/interfaces";
-// enum
-import { binancetype } from "../Tsutilities/enums";
 
 import { UTCTimestamp } from "lightweight-charts";
 
@@ -100,3 +99,22 @@ export const coinbinanceinfo = async (
     return null;
   }
 };
+
+// get all binance around 24hour to filter them by gainer and loser ,...
+export const allbinacesaound24h = async (): Promise<
+  Binanceinfoaround24[] | null
+> => {
+  try {
+    const res = await axios.get("https://api.binance.com/api/v3/ticker/24hr");
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+// // get image
+// export const getCoinImage = (symbol: string) => {
+//   const base = symbol.replace("USDT", "");
+//   return `/coins/${base}.png`;
+// };

@@ -24,7 +24,7 @@ import { filtertrades } from "../helpers/filters";
 export default function Booktrades({
   binancecoinsymbol,
 }: {
-  binancecoinsymbol: binancetype;
+  binancecoinsymbol: binancetype | string;
 }) {
   // change binance config
   const [chart_configration, setchart_configration] =
@@ -97,9 +97,8 @@ export default function Booktrades({
     <div className="flex flex-col gap-6">
       <div className="text-amber-100 flex justify-between">
         <h1>Order Book</h1>
-            <Tooltip title="more">
-
-        <MoreVertIcon className="text-gray-100 hover:cursor-pointer" />
+        <Tooltip title="more">
+          <MoreVertIcon className="text-gray-100 hover:cursor-pointer" />
         </Tooltip>
       </div>
       <div className="flex justify-between gap-4">

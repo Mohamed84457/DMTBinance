@@ -63,3 +63,16 @@ export enum binancetype {
   // Stellar = "XLMUSDT",
   // BitcoinCash = "BCHUSDT",
 }
+
+// currency stype
+export const knownQuotes = [
+  "USDT",
+  "BUSD",
+  "USDC",
+  "BTC",
+  "ETH",
+  "BNB",
+  "IDR",
+  "TRY",
+  "EUR",
+];

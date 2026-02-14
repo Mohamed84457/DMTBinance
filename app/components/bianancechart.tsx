@@ -27,7 +27,7 @@ import { intervals, binancetype } from "../Tsutilities/enums";
 export default function BinanceChart({
   Coinsymbol,
 }: {
-  Coinsymbol: binancetype;
+  Coinsymbol: binancetype|string;
 }) {
   // change binance config
   const [chart_configration, setchart_configration] =

@@ -5,7 +5,8 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-
+// helpers
+import { getQuoteCurrency } from "../helpers/filters";
 // interface
 import { BinancePrice } from "../Tsutilities/interfaces";
 
@@ -16,7 +17,7 @@ function formatPrice(price: number) {
 }
 
 export default function CurrentBinancePrice({
-  binancetype = "BTCUSDT",
+  binancetype,
 }: {
   binancetype: string;
 }) {
@@ -35,7 +36,7 @@ export default function CurrentBinancePrice({
 
         const res = await axios.get<BinancePrice>(
           "https://api.binance.com/api/v3/ticker/price",
-          { params: { symbol } }
+          { params: { symbol } },
         );
 
         const currentPrice = Number(res.data.price);
@@ -75,8 +76,8 @@ export default function CurrentBinancePrice({
               isPriceUp === null
                 ? "text-gray-400"
                 : isPriceUp
-                ? "text-green-500"
-                : "text-red-500"
+                  ? "text-green-500"
+                  : "text-red-500"
             }
           `}
         >
@@ -88,6 +89,7 @@ export default function CurrentBinancePrice({
           )}
         </span>
       )}
+      <span>{getQuoteCurrency(binancetype)}</span>
     </div>
   );
 }

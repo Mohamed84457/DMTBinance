@@ -42,13 +42,12 @@ export default function Binances() {
   const filteredBinances = binances.filter((item) =>
     item.label.toLowerCase().includes(searchbinance.toLowerCase()),
   );
-
+console.log(filteredBinances)
   const mappingbinances = filteredBinances.map((item) => {
     return (
       <DisplayBimamceComponent
-        route={item.label}
+        route={item.value}
         key={item.value}
-        binancecointype={item.value}
         symbol={item.value}
       />
     );
